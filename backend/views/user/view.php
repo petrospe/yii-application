@@ -7,8 +7,10 @@ use common\models\PermissionHelpers;
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
-$this->title = $model->user->username . "'s Profile";
-$this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
+$this->title = $model->username;
+$show_this_nav = PermissionHelpers::requireMinimumRole('SuperUser');
+
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
@@ -16,38 +18,38 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?Php 
         
-        //this is not necessary but in here as example
-        
-        if (PermissionHelpers::userMustBeOwner('profile', $model->id)) {
- 
+<?php if (!Yii::$app->user->isGuest && $show_this_nav) {
             echo Html::a('Update', ['update', 'id' => $model->id], 
-                                   ['class' => 'btn btn-primary']);
-        } 
+                                    ['class' => 'btn btn-primary']);}?>
 
-        ?>
-
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+<?php if (!Yii::$app->user->isGuest && $show_this_nav) {
+      echo Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app', 'Are you sure to delete this item?'),
-                'method' => 'post',
+            'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                        'method' => 'post',
             ],
-        ]) ?>
+        ]);}?>
+
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'id',
-            'user.username',
-            'first_name',
-            'last_name',
-            'birthdate',
-            'gender.gender_name',
+            ['attribute'=>'profileLink', 'format'=>'raw'],
+            
+            //'username',
+            //'auth_key',
+            //'password_hash',
+            //'password_reset_token',
+            'email:email',
+            'roleName',
+            'statusName',
+            'userTypeName',
             'created_at',
             'updated_at',
+            'id',
         ],
     ]) ?>
 
