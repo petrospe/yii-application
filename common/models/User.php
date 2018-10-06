@@ -12,6 +12,7 @@ use backend\models\Role;
 use backend\models\Status;
 use backend\models\UserType;
 use frontend\models\Profile;
+use frontend\models\Address;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -96,6 +97,8 @@ class User extends ActiveRecord implements IdentityInterface
             'statusName' => Yii::t('app', 'Status'),
             'profileId' => Yii::t('app', 'Profile'),
             'profileLink' => Yii::t('app', 'Profile'),
+            'addressId' => Yii::t('app', 'Address'),
+            'addressLink' => Yii::t('app', 'Address'),
             'userLink' => Yii::t('app', 'User'),
             'username' => Yii::t('app', 'User'),
             'userTypeName' => Yii::t('app', 'User Type'),
@@ -360,6 +363,38 @@ class User extends ActiveRecord implements IdentityInterface
         $url = Url::to(['profile/view', 'id'=>$this->profileId]);
         $options = [];
         return Html::a($this->profile ? 'profile' : 'none', $url, $options);
+    }
+    
+    /**
+    * @getAddress
+    * 
+    */
+    
+    public function getAddress()
+    {
+        return $this->hasMany(Address::className(), ['user_id' => 'id']);
+    }
+    
+        /**
+    * @getAddressId
+    * 
+    */
+     
+    public function getAddressId() 
+    {
+       return $this->address ? $this->address->id : 'none';
+    }
+  
+    /**
+     * @getProfileLink
+     * 
+     */
+
+    public function getAddressLink() 
+    {
+        $url = Url::to(['address/view', 'id'=>$this->addressId]);
+        $options = [];
+        return Html::a($this->address ? 'address' : 'none', $url, $options);
     }
     
     /**

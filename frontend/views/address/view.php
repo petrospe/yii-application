@@ -5,13 +5,13 @@ use yii\widgets\DetailView;
 use common\models\PermissionHelpers;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Profile */
+/* @var $model frontend\models\Address */
 
-$this->title = $model->user->username . "'s Profile";
-$this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
+$this->title = $model->user->username . "'s Addresses";
+$this->params['breadcrumbs'][] = ['label' => 'Addresses', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="profile-view">
+<div class="address-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         
         //this is not necessary but in here as example
         
-        if (PermissionHelpers::userMustBeOwner('profile', $model->id)) {
+        if (PermissionHelpers::userMustBeOwner('address', $model->id)) {
  
             echo Html::a('Update', ['update', 'id' => $model->id], 
                                    ['class' => 'btn btn-primary']);
@@ -42,15 +42,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             //'id',
             'user.username',
-            'first_name',
-            'last_name',
-            'birthdate',
-            'gender.gender_name',
+            'receipient_name:ntext',
+            'telephone',
+            'address',
+            'post_code',
+            'city',
+            'country.name_en',
+            'trade',
+            'tax',
+            'inland_revenue',
             'created_at',
             'updated_at',
         ],
     ]) ?>
-    
-    <?= Html::a('Addresses', ['address/index'], ['class' => 'btn btn-default']) ?>
 
 </div>

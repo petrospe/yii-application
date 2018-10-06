@@ -45,7 +45,7 @@ echo Collapse::widget([
 ]);
 Modal::begin([
     'header' => '<h2>Latest Comments</h2>',
-    'toggleButton' => ['label' => 'comments'],
+    'toggleButton' => ['label' => 'comments', 'class' => 'btn btn-lg btn-primary'],
 ]);
 echo FacebookPlugin::widget([
     'type'=>FacebookPlugin::COMMENT, 
