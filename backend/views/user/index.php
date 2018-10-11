@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute'=>'userIdLink', 'format'=>'raw'],
             ['attribute'=>'userLink', 'format'=>'raw'],
             ['attribute'=>'profileLink', 'format'=>'raw'],
+            ['attribute'=>'addressLink', 'format'=>'raw'],
             'email:email',
             'roleName',
             'userTypeName',

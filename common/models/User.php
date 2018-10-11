@@ -382,17 +382,17 @@ class User extends ActiveRecord implements IdentityInterface
      
     public function getAddressId() 
     {
-       return $this->address ? $this->address->id : 'none';
+       return isset($this->address->user_id) ? $this->address->user_id : 'none';
     }
   
     /**
-     * @getProfileLink
+     * @getAddressLink
      * 
      */
 
     public function getAddressLink() 
     {
-        $url = Url::to(['address/view', 'id'=>$this->addressId]);
+        $url = Url::to(['address/index', 'user_id'=>$this->id]);
         $options = [];
         return Html::a($this->address ? 'address' : 'none', $url, $options);
     }
