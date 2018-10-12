@@ -47,6 +47,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
     
-    <?= Html::a('Addresses', ['address/index'], ['class' => 'btn btn-default']) ?>
+    <?= Html::a('Addresses', ['address/index', 'user_id'=>$model->user_id], ['class' => 'btn btn-default']) ?>
 
 </div>
