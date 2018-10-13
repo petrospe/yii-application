@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="address-index">
 
-    <h1><?= $searchModel->userLink ?><?= Html::encode($this->title) ?></h1>
+    <h1><?= $searchModel->userLink ?>'s Addresses</h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>

@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             ['attribute'=>'profileLink', 'format'=>'raw'],
-            
+            ['attribute'=>'addressLink', 'format'=>'raw'],
             //'username',
             //'auth_key',
             //'password_hash',
