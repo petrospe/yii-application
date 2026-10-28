@@ -1,0 +1,19 @@
+{
+    "name": "sxoli/cms-core",
+    "description": "Content, media, menus, comments and settings for Sxoli CMS",
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "version": "1.0.0",
+    "require": {
+        "php": ">=8.1",
+        "yiisoft/yii2": "~2.0.55"
+    },
+    "autoload": {
+        "psr-4": {
+            "sxoli\\cms\\": "src/"
+        }
+    },
+    "extra": {
+        "bootstrap": "sxoli\\cms\\Bootstrap"
+    }
+}

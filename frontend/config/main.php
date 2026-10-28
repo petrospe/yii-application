@@ -1,4 +1,5 @@
 <?php
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -16,19 +17,19 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => sxoli\cms\models\User::class,
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'loginUrl' => ['/site/login'],
         ],
         'session' => [
-            // this is the name of the session cookie used for login on the frontend
-            'name' => 'advanced-frontend',
+            'name' => 'sxoli-frontend',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => yii\log\FileTarget::class,
                     'levels' => ['error', 'warning'],
                 ],
             ],
@@ -36,14 +37,45 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
+            'class' => sxoli\cms\web\UrlManager::class,
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
+            'rules' => (static function (): array {
+                $plain = [
+                    '' => 'content/index',
+                    'blog' => 'content/blog',
+                    'feed' => 'content/feed',
+                    'search' => 'content/search',
+                    'category/<slug:[\w\-]+>' => 'content/category',
+                    'tag/<slug:[\w\-]+>' => 'content/tag',
+                    'page/<slug:[\w\-]+>' => 'content/page',
+                    '<year:\d{4}>/<month:\d{2}>/<slug:[\w\-]+>' => 'content/post',
+                    'comment/create' => 'comment/create',
+                    'login' => 'site/login',
+                    'logout' => 'site/logout',
+                    'signup' => 'site/signup',
+                    'request-password-reset' => 'site/request-password-reset',
+                    'reset-password/<token:[\w\-]+>' => 'site/reset-password',
+                    'profile' => 'profile/index',
+                    '<slug:[\w\-]+>' => 'content/resolve',
+                ];
+                $rules = [];
+                foreach ($plain as $pattern => $route) {
+                    $prefixed = $pattern === '' ? '<lang:(el|en)>' : '<lang:(el|en)>/' . $pattern;
+                    $rules[$prefixed] = $route;
+                }
+                return $rules + $plain;
+            })(),
+        ],
+        'view' => [
+            'theme' => [
+                'class' => yii\base\Theme::class,
+                'pathMap' => [
+                    '@frontend/views' => '@sxoli/theme/views',
+                ],
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

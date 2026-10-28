@@ -1,3 +1,6 @@
 /index.php
 /index-test.php
 /robots.txt
+/uploads/*
+!/uploads/.htaccess
+!/uploads/.gitkeep
